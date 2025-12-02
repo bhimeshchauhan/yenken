@@ -1,0 +1,108 @@
+{
+  "name": "ts-nextjs-boilerplate-starter",
+  "version": "1.0.2",
+  "private": true,
+  "description": "Next.js + Styled Components + TypeScript. Boilerplate packed with useful development features.",
+  "author": {
+    "name": "Cristian J. Ambrosi",
+    "url": "https://cjambrosi.dev.br"
+  },
+  "homepage": "https://github.com/cjambrosi/ts-nextjs-boilerplate-starter#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cjambrosi/ts-nextjs-boilerplate-starter.git"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "eslint src --fix && yarn format",
+    "lint:strict": "eslint --max-warnings=0 src",
+    "typecheck": "tsc --pretty --noEmit",
+    "test": "jest --maxWorkers=50% --silent",
+    "test:unit": "jest --watch",
+    "test:staged": "jest --maxWorkers=25% --bail --silent --coverage --coverageReporters=cobertura",
+    "test:debug": "jest --no-cache --watch",
+    "test-all": "yarn lint && yarn typecheck && yarn test",
+    "format": "prettier -w src",
+    "format:check": "prettier -c src",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
+  },
+  "keywords": [
+    "react",
+    "i18n",
+    "boilerplate",
+    "typescript",
+    "eslint",
+    "styled-components",
+    "jest",
+    "nextjs",
+    "boilerplate-template",
+    "prettier",
+    "starter-template",
+    "starter",
+    "storybook",
+    "husky",
+    "commitlint",
+    "absolute-imports",
+    "internacionalization",
+    "github-actions",
+    "nextjs-starter",
+    "nextjs-boilerplate",
+    "zustand",
+    "nextjs13"
+  ],
+  "dependencies": {
+    "next": "^13.4.19",
+    "next-intl": "^2.20.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.0.7",
+    "typescript": "^5.2.2",
+    "zustand": "^4.4.1"
+  },
+  "resolutions": {
+    "styled-components": "^5"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@testing-library/jest-dom": "^6.1.2",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^29.5.4",
+    "@types/node": "^20.5.9",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "@typescript-eslint/parser": "^6.6.0",
+    "eslint": "^8.48.0",
+    "eslint-config-next": "^13.4.19",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-unused-imports": "^3.0.0",
+    "husky": "^8.0.3",
+    "jest": "^29.6.4",
+    "jest-environment-jsdom": "^29.6.4",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --max-warnings=0",
+      "prettier -w"
+    ],
+    "**/*.{json,css,scss,md,webmanifest}": [
+      "prettier -w"
+    ]
+  }
+}
