@@ -63,8 +63,8 @@ export default function TestimonialsSection(): JSX.Element {
         <HeadingBlock>
           <h2>What clients say</h2>
           <p>
-            Feedback from leaders who have trusted N. K. Nawin on complex
-            highway and corridor assignments.
+            Feedback from leaders who have trusted Yenken on complex highway and
+            corridor assignments.
           </p>
         </HeadingBlock>
 

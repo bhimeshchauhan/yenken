@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -10,41 +11,44 @@ import ServicesShowcase from '@/components/ServiceShowcase';
 
 import { WHATSAPP_LINK } from '@/lib/contactDetails';
 
-/**
- * Sections:
- * 1. Dark hero (headline + CTAs + visual + project thumbnails)
- * 2. Program / expertise strip (teal band)
- * 3. How we help (3 cards)
- * 4. Independent oversight (text + image)
- * 5. Program performance band (dark)
- * 6. Why clients work with us (3 cards)
- * 7. What clients say (testimonials)
- */
-
-/* --- HERO --- */
+/* ---------------- HERO ---------------- */
 
 const HeroSection = styled.section`
-  background: radial-gradient(
-    circle at 10% 0%,
-    #4f46e5 0,
-    #020617 45%,
-    #020617 100%
-  );
-  color: #e5e7eb;
-  padding: 4rem 0 3.8rem;
-
-  @media (min-width: 960px) {
-    padding: 4.8rem 0 4.2rem;
-  }
+  position: relative;
+  padding: 5.2rem 0 4.8rem;
+  color: #f9fafb;
+  overflow: hidden;
+  background: #020617;
 `;
 
-const HeroGrid = styled.div`
-  display: grid;
-  gap: 2.6rem;
+// Background image + gradient overlay
+const HeroBackground = styled.div`
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: linear-gradient(
+      120deg,
+      rgba(15, 23, 42, 0.96) 0%,
+      rgba(15, 23, 42, 0.9) 45%,
+      rgba(15, 23, 42, 0.55) 70%,
+      rgba(15, 23, 42, 0.9) 100%
+    ),
+    url('https://images.pexels.com/photos/258160/pexels-photo-258160.jpeg?auto=compress&cs=tinysrgb&w=1600');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.98;
+`;
 
-  @media (min-width: 980px) {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-    align-items: center;
+const HeroInner = styled(motion.div)`
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+
+  @media (min-width: 1024px) {
+    padding-top: 0.6rem;
   }
 `;
 
@@ -52,18 +56,17 @@ const HeroKicker = styled.div`
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: #9ca3af;
-  margin-bottom: 0.6rem;
+  color: #cbd5f5;
 `;
 
 const HeroTitle = styled.h1`
-  font-size: 2.3rem;
-  line-height: 1.1;
+  font-size: 2.45rem;
+  line-height: 1.08;
   color: #f9fafb;
-  margin-bottom: 0.8rem;
+  margin-top: 0.6rem;
 
-  @media (min-width: 960px) {
-    font-size: 2.8rem;
+  @media (min-width: 768px) {
+    font-size: 2.9rem;
   }
 
   span.accent {
@@ -72,529 +75,449 @@ const HeroTitle = styled.h1`
 `;
 
 const HeroText = styled.p`
-  font-size: 0.96rem;
-  color: #d1d5db;
-  max-width: 40rem;
-  margin-bottom: 1.5rem;
+  font-size: 0.98rem;
+  color: #e5e7eb;
+  max-width: 32rem;
+  margin-top: 0.4rem;
 `;
 
 const CTAGroup = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.9rem;
-  margin-bottom: 1.6rem;
+  margin-top: 1.4rem;
 `;
 
 const PrimaryCTA = styled(Link)`
-  padding: 0.9rem 1.9rem;
+  padding: 0.95rem 2.1rem;
   border-radius: 999px;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 600;
   background: #22c55e;
   color: #022c22;
   box-shadow: 0 18px 40px rgba(34, 197, 94, 0.35);
 `;
 
-const SecondaryCTA = styled(Link)`
-  padding: 0.88rem 1.8rem;
+const WhatsAppCTA = styled.a`
+  padding: 0.95rem 1.9rem;
   border-radius: 999px;
   font-size: 0.9rem;
   font-weight: 500;
   border: 1px solid rgba(148, 163, 184, 0.7);
-  color: #e5e7eb;
-  background: rgba(15, 23, 42, 0.7);
+  color: #f9fafb;
+  background: rgba(15, 23, 42, 0.6);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 `;
 
-const TertiaryCTA = styled.a`
-  padding: 0.86rem 1.6rem;
-  border-radius: 999px;
-  font-size: 0.88rem;
-  font-weight: 500;
-  border: 1px dashed #22c55e;
-  color: #bbf7d0;
-  background: rgba(15, 23, 42, 0.7);
-`;
-
-const HeroStats = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.7rem;
-  font-size: 0.82rem;
-  color: #9ca3af;
-`;
-
-const Stat = styled.div`
-  min-width: 150px;
-
-  small {
-    display: block;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-size: 0.74rem;
-  }
-
-  strong {
-    display: block;
-    font-size: 1.08rem;
-    color: #f9fafb;
-    margin-top: 0.18rem;
-  }
-`;
-
-const HeroVisualCard = styled(motion.div)`
-  border-radius: 26px;
-  background: linear-gradient(135deg, #020617, #0f172a);
-  padding: 1.5rem 1.5rem 1.3rem;
-  box-shadow: 0 22px 52px rgba(15, 23, 42, 0.85);
-`;
-
-const HeroVisualFrame = styled.div`
-  border-radius: 20px;
-  overflow: hidden;
-  background: linear-gradient(135deg, #e0f2fe, #fef9c3);
-  padding: 1.1rem 1rem 0.4rem;
-`;
-
-const HeroVisualImage = styled.img`
-  display: block;
-  width: 100%;
-  max-width: 520px;
-  margin: 0 auto;
-`;
-
-const HeroVisualCaption = styled.div`
-  padding-top: 0.7rem;
-  font-size: 0.78rem;
-  display: flex;
-  justify-content: space-between;
-  gap: 0.6rem;
-  color: #e5e7eb;
-
-  span.label {
-    display: block;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 0.7rem;
-    color: #93c5fd;
-    margin-bottom: 0.1rem;
-  }
-`;
-
-const ProjectThumbRow = styled.div`
-  margin-top: 2.1rem;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.9rem;
-`;
-
-const ProjectThumb = styled.div`
-  border-radius: 16px;
-  overflow: hidden;
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid rgba(51, 65, 85, 0.9);
-  display: flex;
-  flex-direction: column;
-  font-size: 0.78rem;
-
-  img {
-    width: 100%;
-    height: 78px;
-    object-fit: cover;
-  }
-
-  div.info {
-    padding: 0.5rem 0.6rem 0.55rem;
-  }
-
-  span.label {
-    display: block;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: #9ca3af;
-  }
-
-  span.name {
-    display: block;
-    color: #e5e7eb;
-    margin-top: 0.18rem;
-  }
-`;
-
-/* --- STRIP --- */
+/* --------------- STRIP --------------- */
 
 const Strip = styled.section`
-  background: #0ea5e9;
-  padding: 0.6rem 0;
+  background: #020617;
+  padding: 0.8rem 0;
+  border-top: 1px solid #0b1120;
+  border-bottom: 1px solid #0b1120;
 `;
 
 const StripRow = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
+  align-items: center;
   justify-content: center;
+  gap: 0.9rem;
+  flex-wrap: wrap; /* mobile can wrap */
+
+  @media (min-width: 1024px) {
+    flex-wrap: nowrap; /* desktop = one line */
+  }
 `;
 
 const StripBadge = styled.span`
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.78rem;
-  color: #e0f2fe;
-  background: rgba(15, 23, 42, 0.16);
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  color: #e5f0ff;
+  background: rgba(15, 23, 42, 0.9);
   border-radius: 999px;
-  padding: 0.35rem 0.95rem;
+  padding: 0.45rem 1.15rem;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  white-space: nowrap;
 `;
 
-/* --- INDEPENDENT OVERSIGHT SECTION --- */
+const StripIcon = styled.img`
+  width: 18px;
+  height: 18px;
+  display: block;
+  filter: brightness(1.8); /* makes icons brighter but still stylish */
+`;
+
+/* ------------- OVERSIGHT ------------- */
+/* (dark section with “accordion list” + image/stat card) */
 
 const OversightSection = styled.section`
-  padding: 3rem 0 3.4rem;
-  background: #ffffff;
+  padding: 3.6rem 0 3.9rem;
+  background: #020617;
+  color: #e5e7eb;
 `;
 
 const OversightGrid = styled.div`
   display: grid;
-  gap: 2.3rem;
+  gap: 2.6rem;
 
   @media (min-width: 980px) {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     align-items: center;
   }
 `;
 
+const OversightKicker = styled.div`
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #93c5fd;
+  margin-bottom: 0.55rem;
+`;
+
 const OversightTitle = styled.h2`
-  font-size: 1.35rem;
-  color: #0b3a6f;
-  margin-bottom: 0.6rem;
+  font-size: 1rem;
+  line-height: 1.2;
+  color: #f9fafb;
+  margin-bottom: 0.7rem;
 `;
 
-const OversightText = styled.p`
+const OversightLead = styled.p`
   font-size: 0.95rem;
-  color: #4b5563;
-  margin-bottom: 0.9rem;
+  color: #cbd5f5;
+  max-width: 32rem;
 `;
 
-const OversightBullets = styled.ul`
-  margin: 0.5rem 0 0;
-  padding-left: 1.1rem;
-  font-size: 0.9rem;
-  color: #374151;
+const OversightList = styled.ul`
+  margin-top: 1.9rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+`;
 
-  li + li {
-    margin-top: 0.35rem;
+const OversightItem = styled.li<{ $active: boolean }>`
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.28);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  cursor: pointer;
+
+  &:hover {
+    background: radial-gradient(
+      circle at 0 0,
+      rgba(56, 189, 248, 0.14),
+      transparent 55%
+    );
+  }
+
+  h3 {
+    font-size: 0.98rem;
+    font-weight: 500;
+    color: #f9fafb;
+    margin-bottom: 0.25rem;
+  }
+
+  p {
+    font-size: 0.86rem;
+    color: #9ca3af;
+    max-width: 28rem;
+    display: ${({ $active }): string => ($active ? 'block' : 'none')};
   }
 `;
 
-const OversightImageCard = styled.div`
-  border-radius: 24px;
-  overflow: hidden;
-  background: #0f172a;
-  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.35);
+const OversightToggle = styled.span<{ $active: boolean }>`
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: ${({ $active }): string => ($active ? '#22c55e' : '#9ca3af')};
+  flex-shrink: 0;
+`;
+
+const OversightMedia = styled.div`
+  position: relative;
+  max-width: 420px;
+  margin: 0 auto;
 `;
 
 const OversightImage = styled.img`
   width: 100%;
-  height: 210px;
+  border-radius: 28px;
   object-fit: cover;
-
-  @media (min-width: 980px) {
-    height: 260px;
-  }
+  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.85);
 `;
 
-const OversightCaption = styled.div`
-  padding: 0.9rem 1rem 1rem;
-  font-size: 0.8rem;
-  color: #d1d5db;
+const OversightStatCard = styled.div`
+  position: absolute;
+  left: 8%;
+  bottom: 10%;
+  transform: translateY(12px);
+  padding: 0.95rem 1rem;
+  border-radius: 18px;
+  background: #f9fafb;
+  color: #020617;
+  max-width: 220px;
+  font-size: 0.82rem;
+  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.45);
 
   span.label {
-    display: block;
+    display: inline-block;
+    padding: 0.08rem 0.55rem;
+    border-radius: 999px;
     font-size: 0.7rem;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: #93c5fd;
-    margin-bottom: 0.18rem;
+    letter-spacing: 0.12em;
+    background: #e0f2fe;
+    color: #1d4ed8;
+    margin-bottom: 0.35rem;
+  }
+
+  strong {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
   }
 `;
 
-/* --- PROGRAM PERFORMANCE BAND --- */
+/* -------- PROGRAM PERFORMANCE -------- */
+/* (light section like “Better security / credit cards”) */
 
 const PerformanceSection = styled.section`
-  background: #020617;
-  color: #e5e7eb;
-  padding: 3.1rem 0 3.6rem;
+  background: #f9fafb;
+  color: #020617;
+  padding: 3.6rem 0 4.1rem;
 `;
 
 const PerformanceGrid = styled.div`
   display: grid;
-  gap: 2.3rem;
+  gap: 2.6rem;
 
   @media (min-width: 980px) {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
     align-items: center;
   }
 `;
 
 const PerformanceTitle = styled.h2`
-  font-size: 1.35rem;
-  color: #e5e7eb;
-  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  line-height: 1.2;
+  color: #0f172a;
+  margin-bottom: 0.75rem;
 `;
 
-const PerformanceText = styled.p`
+const PerformanceLead = styled.p`
   font-size: 0.95rem;
-  color: #cbd5f5;
-  margin-bottom: 0.9rem;
+  color: #4b5563;
+  max-width: 34rem;
+  margin-bottom: 1.4rem;
 `;
 
-const PerformanceBullets = styled.ul`
-  margin: 0.6rem 0 0;
-  padding-left: 1.1rem;
-  font-size: 0.9rem;
-  color: #d1d5db;
+const PerformanceRule = styled.hr`
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 0 0 1.4rem;
+  max-width: 320px;
+`;
 
-  li + li {
-    margin-top: 0.35rem;
+const PerformancePoint = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  margin-bottom: 0.9rem;
+
+  &:last-child {
+    margin-bottom: 0;
   }
 `;
 
-const CircleMetric = styled.div`
-  position: relative;
-  width: 260px;
-  height: 260px;
-  margin: 0 auto;
-  border-radius: 999px;
-  background: radial-gradient(
-    circle at 30% 0%,
-    #22c55e 0,
-    #0ea5e9 40%,
-    #020617 85%
-  );
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.5);
-  overflow: hidden;
-  display: flex;
+const PerformancePill = styled.span<{ $tone: 'green' | 'red' }>`
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-align: left;
-  padding: 1.2rem;
-`;
-
-const CircleText = styled.div`
+  min-width: 40px;
+  padding: 0.5rem 1.5rem;
+  border-radius: 999px;
   font-size: 0.8rem;
+  font-weight: 500;
+  color: #0f172a;
+  background: ${({ $tone }): string =>
+    $tone === 'green' ? 'rgba(16, 185, 129, 0.2)' : 'rgba(244, 63, 94, 0.18)'};
+`;
 
-  h3 {
-    font-size: 0.95rem;
-    margin-bottom: 0.35rem;
-  }
+const PerformancePointText = styled.div`
+  font-size: 0.9rem;
+  color: #111827;
 
-  span.label {
-    display: block;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 0.7rem;
-    color: #bfdbfe;
-    margin-bottom: 0.18rem;
-  }
-
-  strong {
-    color: #bbf7d0;
+  p {
+    margin-top: 0.18rem;
+    font-size: 0.86rem;
+    color: #6b7280;
   }
 `;
+
+const PerformanceVisual = styled.div`
+  position: relative;
+  max-width: 440px;
+  margin: 0 auto;
+`;
+
+const PerformanceCircle = styled.div`
+  position: absolute;
+  inset: 12% 8% auto auto;
+  border-radius: 999px;
+  background: #dbeafe;
+  opacity: 0.7;
+  filter: blur(2px);
+`;
+
+const PerformanceImage = styled.img`
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  border-radius: 32px;
+  object-fit: cover;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
+`;
+
+/* --------------- DATA ---------------- */
+
+const oversightItems = [
+  {
+    title: 'Custom oversight for complex highway programs',
+    body: 'From greenfield expressways to busy urban flyovers, we keep contracts, design and site realities aligned so work keeps moving.'
+  },
+  {
+    title: 'Clear roles across owners, contractors & lenders',
+    body: 'We help each party understand its obligations and decision points, reducing friction and avoiding surprise escalations.'
+  },
+  {
+    title: 'Early warning before issues turn into disputes',
+    body: 'Structured site reviews and reporting highlight delays, variations and risks in time for corrective action.'
+  },
+  {
+    title: 'Support through claims, negotiations & close-out',
+    body: 'When disputes cannot be avoided, we support you with robust documentation and negotiation strategy.'
+  }
+];
+
+const performancePoints = [
+  {
+    tone: 'green' as const,
+    label: 'Well organised',
+    title: 'Well-organised program view',
+    body: 'Dashboards and reporting that tie together physical progress, payments and risk so you see the true picture.'
+  },
+  {
+    tone: 'red' as const,
+    label: 'Fewer disputes',
+    title: 'Fewer surprises & disputes',
+    body: 'Clear triggers for escalation and structured follow-up help avoid costly delays and arbitration.'
+  }
+];
+
+/* --------------- PAGE ---------------- */
 
 export default function HomeContent(): JSX.Element {
+  const [activeOversight, setActiveOversight] = useState(0);
+
   return (
     <>
-      {/* 1. HERO */}
+      {/* HERO */}
       <HeroSection>
+        <HeroBackground />
         <Container>
-          <HeroGrid>
-            {/* LEFT COLUMN */}
-            <motion.div
-              initial={{ opacity: 0, y: 26 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: 'easeOut' }}
-            >
-              <HeroKicker>
-                Civil engineering consultancy · Highways & infrastructure
-              </HeroKicker>
-              <HeroTitle>
-                Smart <span className='accent'>thinking</span> for complex
-                highways & corridor programs.
-              </HeroTitle>
-              <HeroText>
-                Intl PE – Narendra Kumar Nawin helps governments, developers and
-                multilateral agencies deliver expressways and corridor programs
-                with robust contracts, quality designs and on-time completion.
-              </HeroText>
+          <HeroInner
+            initial={{ opacity: 0, y: 26 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+          >
+            <HeroKicker>
+              Civil engineering consultancy · Highways & infrastructure
+            </HeroKicker>
+            <HeroTitle>
+              Smart <span className='accent'>thinking</span> for complex
+              highways & corridor programs.
+            </HeroTitle>
+            <HeroText>
+              Helping owners and agencies deliver safer, faster and better-
+              governed highway projects.
+            </HeroText>
 
-              <CTAGroup>
-                <PrimaryCTA href='/contact'>
-                  Request a project review
-                </PrimaryCTA>
-                <SecondaryCTA href='/services'>
-                  View consultancy services
-                </SecondaryCTA>
-                <TertiaryCTA
-                  href={WHATSAPP_LINK}
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  Chat on WhatsApp
-                </TertiaryCTA>
-              </CTAGroup>
-
-              <HeroStats>
-                <Stat>
-                  <small>Experience</small>
-                  <strong>35+ years</strong>
-                  Across highways, expressways & corridor programs.
-                </Stat>
-                <Stat>
-                  <small>Highways & expressways</small>
-                  <strong>7,000+ km</strong>
-                  Delivered or advised across India and abroad.
-                </Stat>
-                <Stat>
-                  <small>Program value</small>
-                  <strong>USD 6bn+</strong>
-                  Multilateral and government-funded projects.
-                </Stat>
-              </HeroStats>
-
-              {/* Project thumbnails row */}
-              <ProjectThumbRow>
-                <ProjectThumb>
-                  <img
-                    src='/images/project-expressway-1.jpg'
-                    alt='Expressway project'
-                  />
-                  <div className='info'>
-                    <span className='label'>Expressway</span>
-                    <span className='name'>
-                      Access-controlled greenfield corridor
-                    </span>
-                  </div>
-                </ProjectThumb>
-                <ProjectThumb>
-                  <img src='/images/project-flyover.jpg' alt='Urban flyover' />
-                  <div className='info'>
-                    <span className='label'>Urban flyover</span>
-                    <span className='name'>
-                      Multi-level interchange upgrades
-                    </span>
-                  </div>
-                </ProjectThumb>
-                <ProjectThumb>
-                  <img src='/images/project-bridge.jpg' alt='River bridge' />
-                  <div className='info'>
-                    <span className='label'>Major bridge</span>
-                    <span className='name'>
-                      River crossing on national highway
-                    </span>
-                  </div>
-                </ProjectThumb>
-              </ProjectThumbRow>
-            </motion.div>
-
-            {/* RIGHT COLUMN: VISUAL */}
-            <HeroVisualCard
-              initial={{ opacity: 0, x: 40, scale: 0.96 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
-            >
-              <HeroVisualFrame>
-                {/* Replace with your final hero illustration */}
-                <HeroVisualImage
-                  src='/images/hero-highway-placeholder.svg'
-                  alt='Urban skyline with elevated metro, flyover and engineers on site'
-                />
-              </HeroVisualFrame>
-              <HeroVisualCaption>
-                <div>
-                  <span className='label'>Program focus</span>
-                  <div>Expressways · State highways · Corridor upgrades</div>
-                </div>
-                <div style={{ textAlign: 'right' }}>
-                  <span className='label'>Typical role</span>
-                  <div>Independent advisor / Owner’s engineer</div>
-                </div>
-              </HeroVisualCaption>
-            </HeroVisualCard>
-          </HeroGrid>
+            <CTAGroup>
+              <PrimaryCTA href='/contact'>Request a project review</PrimaryCTA>
+              <WhatsAppCTA
+                href={WHATSAPP_LINK}
+                target='_blank'
+                rel='noreferrer'
+              >
+                Chat on WhatsApp
+              </WhatsAppCTA>
+            </CTAGroup>
+          </HeroInner>
         </Container>
       </HeroSection>
 
-      {/* 2. PROGRAM / EXPERTISE STRIP */}
+      {/* Strip (with real logos) */}
       <Strip>
         <Container>
           <StripRow>
-            <StripBadge>✅ World Bank / ADB experience</StripBadge>
-            <StripBadge>✅ EPC, PPP & HAM contract expertise</StripBadge>
-            <StripBadge>✅ Advisory for PWD & state agencies</StripBadge>
-            <StripBadge>✅ Focus on time, quality & safety</StripBadge>
+            {/* World Bank */}
+            <StripBadge>
+              <StripIcon src='/images/wb.png' alt='World Bank' loading='lazy' />
+              World Bank
+            </StripBadge>
+
+            {/* ADB */}
+            <StripBadge>
+              <StripIcon
+                src='https://upload.wikimedia.org/wikipedia/commons/4/43/Asian_Development_Bank_logo.svg'
+                alt='Asian Development Bank'
+                loading='lazy'
+              />
+              ADB experience
+            </StripBadge>
+
+            {/* Contract expertise */}
+            <StripBadge>
+              <StripIcon
+                src='https://cdn.jsdelivr.net/npm/heroicons@2.1.5/24/solid/document-text.svg'
+                alt='Contract expertise'
+                loading='lazy'
+                style={{ filter: 'invert(1) brightness(2)' }}
+              />
+              EPC, PPP &amp; HAM contract expertise
+            </StripBadge>
+
+            {/* PWD / State agencies */}
+            <StripBadge>
+              <StripIcon
+                src='https://unpkg.com/lucide-static@latest/icons/landmark.svg'
+                alt='PWD & state agencies'
+                loading='lazy'
+                style={{ filter: 'invert(1) brightness(2)' }}
+              />
+              Advisory for PWD &amp; state agencies
+            </StripBadge>
+
+            {/* Safety & quality */}
+            <StripBadge>
+              <StripIcon
+                src='https://unpkg.com/lucide-static@latest/icons/hard-hat.svg'
+                alt='Safety & quality'
+                loading='lazy'
+                style={{ filter: 'invert(1) brightness(2)' }}
+              />
+              Focus on time, quality &amp; safety
+            </StripBadge>
           </StripRow>
         </Container>
       </Strip>
 
-      {/* 3. HOW WE HELP */}
+      {/* HOW WE HELP */}
       <ServicesShowcase />
-
-      {/* 4. INDEPENDENT OVERSIGHT */}
-      <OversightSection>
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 26 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            <OversightGrid>
-              <div>
-                <OversightTitle>
-                  Independent oversight that protects your investment.
-                </OversightTitle>
-                <OversightText>
-                  Large highway programs fail when contracts, design and site
-                  realities drift apart. We act as an independent voice to keep
-                  obligations, quality and progress aligned.
-                </OversightText>
-
-                <OversightBullets>
-                  <li>
-                    Review of EPC / HAM / PPP contracts and risk allocation.
-                  </li>
-                  <li>
-                    Structured site reviews and progress reporting for decision
-                    makers.
-                  </li>
-                  <li>
-                    Early warning on delays, variations and potential disputes.
-                  </li>
-                  <li>
-                    Support on claims, negotiations and contract close-out.
-                  </li>
-                </OversightBullets>
-              </div>
-
-              <OversightImageCard>
-                {/* Replace with a real photo of site inspection / meeting */}
-                <OversightImage
-                  src='/images/oversight-site-review.jpg'
-                  alt='Engineers reviewing drawings on a highway construction site'
-                />
-                <OversightCaption>
-                  <span className='label'>On-site focus</span>
-                  Indepth reviews with concessionaires, contractors and PWD
-                  teams to keep projects moving without surprises.
-                </OversightCaption>
-              </OversightImageCard>
-            </OversightGrid>
-          </motion.div>
-        </Container>
-      </OversightSection>
-
-      {/* 5. PROGRAM PERFORMANCE BAND */}
+      {/* PROGRAM PERFORMANCE (light “security/cards” style) */}
       <PerformanceSection>
         <Container>
           <motion.div
@@ -606,47 +529,103 @@ export default function HomeContent(): JSX.Element {
             <PerformanceGrid>
               <div>
                 <PerformanceTitle>
-                  Program performance that stakeholders can trust.
+                  Better program control. Stronger stakeholder confidence.
                 </PerformanceTitle>
-                <PerformanceText>
-                  Expressway and corridor programs involve many contracts,
-                  packages and agencies. We help you see the full picture so you
-                  can act before issues turn into claims.
-                </PerformanceText>
+                <PerformanceLead>
+                  Expressway and corridor programs involve many packages,
+                  contracts and agencies. We help you design a control framework
+                  that everyone can trust.
+                </PerformanceLead>
 
-                <PerformanceBullets>
-                  <li>
-                    Portfolio-level view across packages, contracts and
-                    milestones.
-                  </li>
-                  <li>
-                    Dashboards that link physical progress, payments and risk.
-                  </li>
-                  <li>Clear triggers for escalation and corrective action.</li>
-                  <li>
-                    Lessons learned to improve the next program you deliver.
-                  </li>
-                </PerformanceBullets>
+                <PerformanceRule />
+
+                {performancePoints.map((p) => (
+                  <PerformancePoint key={p.title}>
+                    <PerformancePill $tone={p.tone}>{p.label}</PerformancePill>
+                    <PerformancePointText>
+                      <strong>{p.title}</strong>
+                      <p>{p.body}</p>
+                    </PerformancePointText>
+                  </PerformancePoint>
+                ))}
               </div>
 
-              <CircleMetric>
-                {/* Placeholder metric – feel free to change wording / numbers */}
-                <CircleText>
-                  <span className='label'>Measured impact</span>
-                  <h3>Fewer disputes. Stronger outcomes.</h3>
-                  <p>
-                    Clients report <strong>25–30% reduction</strong> in
-                    avoidable delay claims and smoother lender interactions when
-                    structured oversight is in place.
-                  </p>
-                </CircleText>
-              </CircleMetric>
+              <PerformanceVisual>
+                <PerformanceCircle />
+                {/* Temporary visual - replace with your program dashboard / cards illustration */}
+                <PerformanceImage
+                  src='https://images.pexels.com/photos/6476584/pexels-photo-6476584.jpeg?auto=compress&cs=tinysrgb&w=1600'
+                  alt='Dashboard and reports illustrating highway program performance'
+                />
+              </PerformanceVisual>
             </PerformanceGrid>
           </motion.div>
         </Container>
       </PerformanceSection>
+      {/* OVERSIGHT (accordion style) */}
+      <OversightSection>
+        <Container>
+          <motion.div
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
+            <OversightGrid>
+              <div>
+                <OversightKicker>Independent oversight</OversightKicker>
+                <OversightTitle>
+                  Oversight that keeps contracts, design and site realities
+                  aligned.
+                </OversightTitle>
+                <OversightLead>
+                  Large highway programs fail when obligations drift and nobody
+                  has the full picture. We act as an independent voice to keep
+                  quality, progress and risk under control.
+                </OversightLead>
 
-      {/* TRUST + WHY + TESTIMONIALS */}
+                <OversightList>
+                  {oversightItems.map((item, index) => {
+                    const active = index === activeOversight;
+                    return (
+                      <OversightItem
+                        key={item.title}
+                        $active={active}
+                        onClick={(): void => setActiveOversight(index)}
+                      >
+                        <div>
+                          <h3>{item.title}</h3>
+                          <p>{item.body}</p>
+                        </div>
+                        <OversightToggle $active={active}>
+                          {active ? '−' : '+'}
+                        </OversightToggle>
+                      </OversightItem>
+                    );
+                  })}
+                </OversightList>
+              </div>
+
+              <OversightMedia>
+                {/* You can replace this image with your own site-meeting photo */}
+                <OversightImage
+                  src='https://images.pexels.com/photos/1181395/pexels-photo-1181395.jpeg?auto=compress&cs=tinysrgb&w=1600'
+                  alt='Project team reviewing highway program performance in a meeting room'
+                />
+                <OversightStatCard>
+                  <span className='label'>Program oversight</span>
+                  <strong>27% fewer delays</strong>
+                  <span>
+                    Typical reduction in avoidable delay claims when structured
+                    oversight is in place.
+                  </span>
+                </OversightStatCard>
+              </OversightMedia>
+            </OversightGrid>
+          </motion.div>
+        </Container>
+      </OversightSection>
+      {/* WHY + TESTIMONIALS */}
       <ClientTrustSection />
     </>
   );

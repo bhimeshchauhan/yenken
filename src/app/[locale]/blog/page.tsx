@@ -8,7 +8,7 @@ import BlogContent from './BlogContent';
 export const metadata: Metadata = {
   title: 'News & Insights – Civil & Highway Engineering',
   description:
-    'Articles and insights on highway engineering, contracts and infrastructure program delivery by N. K. Nawin.'
+    'Articles and insights on highway engineering, contracts and infrastructure program delivery by Yenken.'
 };
 
 export default function BlogPage(): JSX.Element {

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import styled from 'styled-components';
 
@@ -23,9 +24,16 @@ const Inner = styled.div`
   justify-content: space-between;
 `;
 
-// Styled Next <Link> for brand
+/* ---------- BRAND (logo + text) ---------- */
+
 const Brand = styled(Link)`
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+`;
+
+const BrandText = styled.div`
   font-weight: 700;
   font-size: 1.05rem;
   color: #0b3a6f;
@@ -40,7 +48,16 @@ const Brand = styled(Link)`
   }
 `;
 
-// Styled Next <Link> for nav items
+const BrandLogoWrapper = styled.div`
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+`;
+
+/* ---------- NAV ---------- */
+
 const NavItem = styled(Link)`
   font-size: 0.9rem;
   color: #111827;
@@ -114,8 +131,18 @@ export default function Navbar(): JSX.Element {
     <Header>
       <Inner>
         <Brand href='/'>
-          Yenken Consulting
-          <span>Intl PE · Infrastructure & Contracts</span>
+          <BrandLogoWrapper>
+            <Image
+              src='images/logo.svg'
+              alt='Yenken Consulting logo'
+              width={32}
+              height={32}
+            />
+          </BrandLogoWrapper>
+          <BrandText>
+            Yenken Consulting
+            <span>Intl PE · Infrastructure &amp; Contracts</span>
+          </BrandText>
         </Brand>
 
         <Burger

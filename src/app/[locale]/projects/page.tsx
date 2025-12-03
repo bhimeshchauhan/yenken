@@ -8,7 +8,7 @@ import ProjectsContent from './ProjectsContent';
 export const metadata: Metadata = {
   title: 'Projects – Selected Highway & Corridor Assignments',
   description:
-    'View a selection of highway, expressway and infrastructure projects supported by N. K. Nawin Consulting.'
+    'View a selection of highway, expressway and infrastructure projects supported by Yenken Consulting.'
 };
 
 export default function ProjectsPage(): JSX.Element {

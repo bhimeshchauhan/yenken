@@ -149,7 +149,7 @@ export default function ProjectSlider(): JSX.Element {
           <TextBlock>
             <h2>Delivering complex corridors with confidence.</h2>
             <p>
-              From national expressways to cross-border corridors, N. K. Nawin
+              From national expressways to cross-border corridors, Yenken
               Consulting has led and advised on programs funded by World Bank,
               ADB, AfDB and state agencies – with a focus on time, quality and
               safety.
