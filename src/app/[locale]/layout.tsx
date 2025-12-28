@@ -8,6 +8,8 @@ import { getI18nLocales } from '@/utils/getI18nLocales';
 
 const inter = Inter({ subsets: ['latin'] });
 
+export const dynamicParams = false;
+
 export function generateStaticParams(): { locale: string }[] {
   return getI18nLocales().map((locale) => ({
     locale: locale as unknown as string
@@ -16,13 +18,14 @@ export function generateStaticParams(): { locale: string }[] {
 
 export default async function LocaleLayout({
   children,
-  params: { locale }
+  params
 }: {
   children: ReactNode;
   params: { locale: string };
 }): Promise<JSX.Element> {
-  let messages;
+  const { locale } = params;
 
+  let messages;
   try {
     messages = (await import(`../../locales/${locale}.json`)).default;
   } catch {

@@ -1,10 +1,11 @@
-// src/app/[locale]/contact/page.tsx
 import type { Metadata } from 'next';
 
 import PageHeader from '@/components/PageHeader';
 import SiteLayout from '@/components/SiteLayout';
 
 import ContactContent from './ContactContent';
+
+export const dynamicParams = false;
 
 export const metadata: Metadata = {
   title: 'Contact – YICE',

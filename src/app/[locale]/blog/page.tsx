@@ -5,6 +5,8 @@ import SiteLayout from '@/components/SiteLayout';
 
 import BlogContent from './BlogContent';
 
+export const dynamicParams = false;
+
 export const metadata: Metadata = {
   title: 'News & Insights – Civil & Highway Engineering',
   description:
