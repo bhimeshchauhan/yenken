@@ -1,15 +1,10 @@
-/** @type {import('next').NextConfig} */
 const repoName = 'yenken';
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-
-  compiler: {
-    styledComponents: true
-  },
-
-  // REQUIRED for GitHub Pages (project repo)
   output: 'export',
+
   basePath: `/${repoName}`,
   assetPrefix: `/${repoName}/`,
 
@@ -17,7 +12,11 @@ const nextConfig = {
     unoptimized: true
   },
 
-  trailingSlash: true
+  trailingSlash: true,
+
+  compiler: {
+    styledComponents: true
+  }
 };
 
 module.exports = nextConfig;

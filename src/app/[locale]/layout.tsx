@@ -1,7 +1,8 @@
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
+import type { ReactNode } from 'react';
 
-import { Ii18nLocales, IRootLayoutProps } from '@/types/global';
+import type { Ii18nLocales, IRootLayoutProps } from '@/types/global';
 import { AppProvider } from '@/config/AppProvider';
 
 import { getI18nLocales } from '@/utils/getI18nLocales';
@@ -20,22 +21,22 @@ export const metadata = {
     'Yenken Inc. - Your trusted partner in civil and infrastructure projects.'
 };
 
-export default async function RootLayout({
+export default async function LocaleLayout({
   children,
   params: { locale }
-}: IRootLayoutProps): Promise<JSX.Element> {
-  let localesFile;
+}: IRootLayoutProps & { children: ReactNode }): Promise<JSX.Element> {
+  let messages;
 
   try {
-    localesFile = (await import(`../../locales/${locale}.json`)).default;
-  } catch (error) {
+    messages = (await import(`../../locales/${locale}.json`)).default;
+  } catch {
     notFound();
   }
 
   return (
     <html lang={locale}>
       <body className={inter.className}>
-        <AppProvider locale={locale} messages={localesFile}>
+        <AppProvider locale={locale} messages={messages}>
           {children}
         </AppProvider>
       </body>
