@@ -11,10 +11,7 @@
 # next.js
 /.next/
 /out/
-<<<<<<< HEAD
-=======
 .swc
->>>>>>> boiler/main
 
 # production
 /build
@@ -22,10 +19,7 @@
 # misc
 .DS_Store
 *.pem
-<<<<<<< HEAD
-=======
 .dccache
->>>>>>> boiler/main
 
 # debug
 npm-debug.log*
@@ -34,10 +28,6 @@ yarn-error.log*
 
 # local env files
 .env*.local
-<<<<<<< HEAD
-.env
-=======
->>>>>>> boiler/main
 
 # vercel
 .vercel
@@ -45,9 +35,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-<<<<<<< HEAD
-=======
 
 # lock file
 *-lock.json
->>>>>>> boiler/main
