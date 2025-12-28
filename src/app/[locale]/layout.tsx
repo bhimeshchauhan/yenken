@@ -2,17 +2,14 @@ import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import type { ReactNode } from 'react';
 
-import type { Ii18nLocales } from '@/types/global';
 import { AppProvider } from '@/config/AppProvider';
 
 import { getI18nLocales } from '@/utils/getI18nLocales';
 
-import '../globals.css';
-
 const inter = Inter({ subsets: ['latin'] });
 
-export function generateStaticParams(): Ii18nLocales[] {
-  return getI18nLocales();
+export function generateStaticParams(): { locale: string }[] {
+  return getI18nLocales().map((locale) => ({ locale: String(locale) }));
 }
 
 export default async function LocaleLayout({
