@@ -5,8 +5,6 @@ import SiteLayout from '@/components/SiteLayout';
 
 import ContactContent from './ContactContent';
 
-export const dynamicParams = false;
-
 export const metadata: Metadata = {
   title: 'Contact – YICE',
   description:

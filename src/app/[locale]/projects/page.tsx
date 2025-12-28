@@ -5,8 +5,6 @@ import SiteLayout from '@/components/SiteLayout';
 
 import ProjectsContent from './ProjectsContent';
 
-export const dynamicParams = false;
-
 export const metadata: Metadata = {
   title: 'Projects – Selected Highway & Corridor Assignments',
   description:

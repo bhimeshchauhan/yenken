@@ -5,8 +5,6 @@ import SiteLayout from '@/components/SiteLayout';
 
 import ServicesContent from './ServicesContent';
 
-export const dynamicParams = false;
-
 export const metadata: Metadata = {
   title: 'Services – Highway & Infrastructure Consultancy',
   description:

@@ -12,7 +12,7 @@ export const dynamicParams = false;
 
 export function generateStaticParams(): { locale: string }[] {
   return getI18nLocales().map((locale) => ({
-    locale: locale as unknown as string
+    locale
   }));
 }
 

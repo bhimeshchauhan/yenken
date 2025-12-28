@@ -5,8 +5,6 @@ import SiteLayout from '@/components/SiteLayout';
 
 import AboutContent from './AboutContent';
 
-export const dynamicParams = false;
-
 export const metadata: Metadata = {
   title: 'About – YICE | Civil & Highway Engineering',
   description:
