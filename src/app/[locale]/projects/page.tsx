@@ -8,7 +8,7 @@ import ProjectsContent from './ProjectsContent';
 export const metadata: Metadata = {
   title: 'Projects – Selected Highway & Corridor Assignments',
   description:
-    'View a selection of highway, expressway and infrastructure projects supported by Yenken Consulting.'
+    'View a selection of highway, expressway and infrastructure projects supported by YICE.'
 };
 
 export default function ProjectsPage(): JSX.Element {

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styled from 'styled-components';
 
 import { PHONE_TEL } from '@/lib/contactDetails';
@@ -58,9 +59,27 @@ const BrandLogoWrapper = styled.div`
 
 /* ---------- NAV ---------- */
 
-const NavItem = styled(Link)`
+const NavItem = styled(Link)<{ $active: boolean }>`
   font-size: 0.9rem;
-  color: #111827;
+  color: ${({ $active }): string => ($active ? '#0b3a6f' : '#111827')};
+  font-weight: ${({ $active }): string => ($active ? '600' : '400')};
+  position: relative;
+  text-decoration: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: ${({ $active }): string => ($active ? '100%' : '0')};
+    height: 2px;
+    background: #0b3a6f;
+    transition: width 0.2s ease;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
 `;
 
 const NavLinks = styled.nav<{ open: boolean }>`
@@ -124,6 +143,9 @@ const links = [
 
 export default function Navbar(): JSX.Element {
   const [open, setOpen] = useState<boolean>(false);
+  const pathname = usePathname();
+  const normalizedPathRaw = pathname.replace(/^\/[^/]+(?=\/|$)/, '');
+  const normalizedPath = normalizedPathRaw === '' ? '/' : normalizedPathRaw;
 
   const closeMenu = (): void => setOpen(false);
 
@@ -133,14 +155,14 @@ export default function Navbar(): JSX.Element {
         <Brand href='/'>
           <BrandLogoWrapper>
             <Image
-              src='images/logo.svg'
-              alt='Yenken Consulting logo'
+              src='/images/logo.svg'
+              alt='YICE logo'
               width={32}
               height={32}
             />
           </BrandLogoWrapper>
           <BrandText>
-            Yenken Consulting
+            Yenken International Consulting Enterprises (YICE)
             <span>Intl PE · Infrastructure &amp; Contracts</span>
           </BrandText>
         </Brand>
@@ -155,11 +177,23 @@ export default function Navbar(): JSX.Element {
         </Burger>
 
         <NavLinks open={open}>
-          {links.map((l) => (
-            <NavItem key={l.href} href={l.href} onClick={closeMenu}>
-              {l.label}
-            </NavItem>
-          ))}
+          {links.map((l) => {
+            const isActive =
+              l.href === '/'
+                ? normalizedPath === '/'
+                : normalizedPath.startsWith(l.href);
+
+            return (
+              <NavItem
+                key={l.href}
+                href={l.href}
+                $active={isActive}
+                onClick={closeMenu}
+              >
+                {l.label}
+              </NavItem>
+            );
+          })}
 
           {/* Tel link is external → normal <a>, not Next <Link> */}
           <CTAButton href={`tel:${PHONE_TEL}`} onClick={closeMenu}>

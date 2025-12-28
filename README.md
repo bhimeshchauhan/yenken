@@ -1,10 +1,12 @@
 <<<<<<< HEAD
+
 # yenken
-yenken website
-=======
+
+# yenken website
+
 # Next.js + Styled Components + TypeScript - Boilerplate Starter
 
-<div align="center">
+<di align="center">
   <h2>ts-nextjs-boilerplate-starter</h2>
   <p>Next.js + Styled Components + TypeScript. Boilerplate packed with useful development features.</p>
   <p>Made by <a href="https://www.linkedin.com/in/cjambrosi" target="_blank">Cristian J. Ambrosi</a></p>
@@ -13,7 +15,7 @@ yenken website
 ![GitHub](https://img.shields.io/github/license/cjambrosi/ts-nextjs-boilerplate-starter?label=Licence)
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-green.svg?)](#contributors-)
 
-</div>
+</di
 
 ## Get started
 
@@ -122,4 +124,5 @@ You can also:
 ## License
 
 Licensed under the [MIT License](LICENSE)
->>>>>>> boiler/main
+
+> > > > > > > boiler/main

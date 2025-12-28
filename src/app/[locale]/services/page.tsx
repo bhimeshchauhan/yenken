@@ -8,7 +8,7 @@ import ServicesContent from './ServicesContent';
 export const metadata: Metadata = {
   title: 'Services – Highway & Infrastructure Consultancy',
   description:
-    'Explore the civil engineering consultancy services offered by Yenken Consulting – from project management to advisory and institutional support.'
+    'Explore the civil engineering consultancy services offered by YICE – from project management to advisory and institutional support.'
 };
 
 export default function ServicesPage(): JSX.Element {

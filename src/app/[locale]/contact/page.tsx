@@ -7,9 +7,9 @@ import SiteLayout from '@/components/SiteLayout';
 import ContactContent from './ContactContent';
 
 export const metadata: Metadata = {
-  title: 'Contact – Yenken Consulting',
+  title: 'Contact – YICE',
   description:
-    'Contact Yenken Consulting to discuss your highway, expressway or infrastructure program.'
+    'Contact YICE to discuss your highway, expressway or infrastructure program.'
 };
 
 export default function ContactPage(): JSX.Element {

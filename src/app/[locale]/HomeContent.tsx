@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Marquee from 'react-fast-marquee';
 import styled from 'styled-components';
 
 import ClientTrustSection from '@/components/ClientTrustSection';
@@ -120,16 +121,16 @@ const Strip = styled.section`
   border-bottom: 1px solid #0b1120;
 `;
 
+const MarqueeSpacer = styled.span`
+  display: inline-block;
+  width: 0.8rem;
+`;
+
 const StripRow = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.9rem;
-  flex-wrap: wrap; /* mobile can wrap */
-
-  @media (min-width: 1024px) {
-    flex-wrap: nowrap; /* desktop = one line */
-  }
+  white-space: nowrap;
 `;
 
 const StripBadge = styled.span`
@@ -419,6 +420,83 @@ const performancePoints = [
 
 /* --------------- PAGE ---------------- */
 
+const StripItems = (): JSX.Element => (
+  <StripRow>
+    <StripBadge>
+      <StripIcon src='/images/wb.png' alt='World Bank' loading='lazy' />
+      World Bank
+    </StripBadge>
+
+    <StripBadge>
+      <StripIcon
+        src='https://upload.wikimedia.org/wikipedia/commons/4/43/Asian_Development_Bank_logo.svg'
+        alt='Asian Development Bank'
+        loading='lazy'
+      />
+      ADB experience
+    </StripBadge>
+
+    <StripBadge>
+      <StripIcon
+        src='https://upload.wikimedia.org/wikipedia/commons/4/43/Asian_Development_Bank_logo.svg'
+        alt='African Development Bank'
+        loading='lazy'
+      />
+      AfDB experience
+    </StripBadge>
+
+    <StripBadge>
+      <StripIcon
+        src='https://cdn.jsdelivr.net/npm/heroicons@2.1.5/24/solid/document-text.svg'
+        alt='Contract expertise'
+        loading='lazy'
+        style={{ filter: 'invert(1) brightness(2)' }}
+      />
+      Contract expertise – All settings
+    </StripBadge>
+
+    <StripBadge>
+      <StripIcon
+        src='https://cdn.jsdelivr.net/npm/heroicons@2.1.5/24/solid/document-text.svg'
+        alt='Institutional Development'
+        loading='lazy'
+        style={{ filter: 'invert(1) brightness(2)' }}
+      />
+      Institutional Development
+    </StripBadge>
+
+    <StripBadge>
+      <StripIcon
+        src='https://unpkg.com/lucide-static@latest/icons/landmark.svg'
+        alt='PWD & state agencies'
+        loading='lazy'
+        style={{ filter: 'invert(1) brightness(2)' }}
+      />
+      Skill development trainings & Certifications
+    </StripBadge>
+
+    <StripBadge>
+      <StripIcon
+        src='https://unpkg.com/lucide-static@latest/icons/hard-hat.svg'
+        alt='Safety & quality'
+        loading='lazy'
+        style={{ filter: 'invert(1) brightness(2)' }}
+      />
+      Focus on cost, time, quality &amp; safety
+    </StripBadge>
+
+    <StripBadge>
+      <StripIcon
+        src='https://unpkg.com/lucide-static@latest/icons/hard-hat.svg'
+        alt='Safety & quality'
+        loading='lazy'
+        style={{ filter: 'invert(1) brightness(2)' }}
+      />
+      Ethics &amp; Sustainability
+    </StripBadge>
+  </StripRow>
+);
+
 export default function HomeContent(): JSX.Element {
   const [activeOversight, setActiveOversight] = useState(0);
 
@@ -434,19 +512,25 @@ export default function HomeContent(): JSX.Element {
             transition={{ duration: 0.7, ease: 'easeOut' }}
           >
             <HeroKicker>
-              Civil engineering consultancy · Highways & infrastructure
+              Civil engineering consultancy · Highways & Other Infrastructure
             </HeroKicker>
             <HeroTitle>
-              Smart <span className='accent'>thinking</span> for complex
-              highways & corridor programs.
+              Smart &{' '}
+              <span className='accent'>
+                Sustainable Development Intl. Partner{' '}
+              </span>{' '}
+              delivering Quality Consultancy Services for all needs of Private
+              and Government clients.
             </HeroTitle>
             <HeroText>
               Helping owners and agencies deliver safer, faster and better-
-              governed highway projects.
+              governed highway & other infra projects.
             </HeroText>
 
             <CTAGroup>
-              <PrimaryCTA href='/contact'>Request a project review</PrimaryCTA>
+              <PrimaryCTA href='/contact'>
+                Request a project advisory / proposal
+              </PrimaryCTA>
               <WhatsAppCTA
                 href={WHATSAPP_LINK}
                 target='_blank'
@@ -462,56 +546,10 @@ export default function HomeContent(): JSX.Element {
       {/* Strip (with real logos) */}
       <Strip>
         <Container>
-          <StripRow>
-            {/* World Bank */}
-            <StripBadge>
-              <StripIcon src='/images/wb.png' alt='World Bank' loading='lazy' />
-              World Bank
-            </StripBadge>
-
-            {/* ADB */}
-            <StripBadge>
-              <StripIcon
-                src='https://upload.wikimedia.org/wikipedia/commons/4/43/Asian_Development_Bank_logo.svg'
-                alt='Asian Development Bank'
-                loading='lazy'
-              />
-              ADB experience
-            </StripBadge>
-
-            {/* Contract expertise */}
-            <StripBadge>
-              <StripIcon
-                src='https://cdn.jsdelivr.net/npm/heroicons@2.1.5/24/solid/document-text.svg'
-                alt='Contract expertise'
-                loading='lazy'
-                style={{ filter: 'invert(1) brightness(2)' }}
-              />
-              EPC, PPP &amp; HAM contract expertise
-            </StripBadge>
-
-            {/* PWD / State agencies */}
-            <StripBadge>
-              <StripIcon
-                src='https://unpkg.com/lucide-static@latest/icons/landmark.svg'
-                alt='PWD & state agencies'
-                loading='lazy'
-                style={{ filter: 'invert(1) brightness(2)' }}
-              />
-              Advisory for PWD &amp; state agencies
-            </StripBadge>
-
-            {/* Safety & quality */}
-            <StripBadge>
-              <StripIcon
-                src='https://unpkg.com/lucide-static@latest/icons/hard-hat.svg'
-                alt='Safety & quality'
-                loading='lazy'
-                style={{ filter: 'invert(1) brightness(2)' }}
-              />
-              Focus on time, quality &amp; safety
-            </StripBadge>
-          </StripRow>
+          <Marquee speed={40} gradient={false} pauseOnHover autoFill>
+            <StripItems />
+            <MarqueeSpacer />
+          </Marquee>
         </Container>
       </Strip>
 

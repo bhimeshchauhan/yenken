@@ -414,7 +414,7 @@ export default function AboutContent(): JSX.Element {
               <FloatingNote>
                 <strong>Narendra Kumar Nawin</strong>
                 <span className='role'>
-                  Intl PE – Highway &amp; Infrastructure Consultant
+                  Intl PE – Highway &amp; Other Infrastructure Consultant
                 </span>
                 <p>
                   “We help owners see the full picture – contracts, progress and
@@ -427,7 +427,7 @@ export default function AboutContent(): JSX.Element {
             <div>
               <Eyebrow>About the consultant</Eyebrow>
               <HeroHeading>
-                Independent highway &amp; corridor program expertise.
+                Independent highway &amp; other program expertise.
               </HeroHeading>
               <HeroBody>
                 Intl PE – Narendra Kumar Nawin is a civil engineer and project
@@ -487,8 +487,9 @@ export default function AboutContent(): JSX.Element {
                     <ReasonIcon>🤝</ReasonIcon>
                     <ReasonText>
                       <strong>Stakeholder alignment</strong>
-                      Ability to work with PWDs, concessionaires, contractors
-                      and banks so everyone sees the same picture.
+                      Ability to work with MoRTH, NHAI, MSRDC, PWDs,
+                      concessionaires, contractors and banks so everyone sees
+                      the same picture.
                     </ReasonText>
                   </ReasonItem>
                 </ReasonList>
@@ -522,12 +523,12 @@ export default function AboutContent(): JSX.Element {
               <strong>35+ years</strong>
             </StatBlock>
             <StatBlock>
-              <small>Highways &amp; corridors</small>
+              <small>Highways &amp; other infra programs</small>
               <strong>7,000+ km</strong>
             </StatBlock>
             <StatBlock>
               <small>Programs delivered</small>
-              <strong>USD 6bn+</strong>
+              <strong>USD 6Bn+</strong>
             </StatBlock>
             <StatBlock>
               <small>Countries worked in</small>
@@ -557,9 +558,9 @@ export default function AboutContent(): JSX.Element {
                   single contracts to complex, multi-package corridor programs.
                 </StoryText>
                 <StoryText>
-                  Yenken Consulting distils that experience into clear advisory
-                  support – from bid strategy and contract structuring to
-                  on-site oversight, claims and institutional strengthening.
+                  YICE distils that experience into clear advisory support –
+                  from bid strategy and contract structuring to on-site
+                  oversight, claims and other institutional strengthening.
                 </StoryText>
               </div>
             </StorySplit>
@@ -586,7 +587,7 @@ export default function AboutContent(): JSX.Element {
                 />
                 <MemberName>Narendra Kumar Nawin</MemberName>
                 <MemberRole>
-                  Intl PE – Highway &amp; Infrastructure Consultant
+                  Intl PE – Highway &amp; Other Infrastructure Consultant
                 </MemberRole>
               </MemberCard>
 

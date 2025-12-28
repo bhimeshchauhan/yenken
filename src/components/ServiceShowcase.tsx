@@ -13,15 +13,22 @@ const services = [
   {
     id: 'prebid',
     label: 'Pre-bid & project strategy',
-    short:
-      'Shape realistic, bankable proposals before you commit to a corridor program.',
+    short: 'Support from bid opportunity review to contract negotiations.',
     description:
-      'Quick, targeted reviews of scope, risks and timelines so you can bid confidently on complex EPC / HAM / PPP highway projects.',
-    bullets: [
-      'Opportunity review for expressway and corridor packages.',
-      'High-level traffic, cost and schedule reasonableness checks.',
-      'Risk allocation review for EPC, HAM and PPP contracts.',
-      'Inputs to bidding strategy, margins and contingency.'
+      'Pre-bid advisory covering planning, tendering and contract award for highway and other infrastructure projects.',
+    contractorBullets: [
+      'Bid opportunity & risk review.',
+      'Site appraisal.',
+      'Review on project cost & risk.',
+      'Assistance in bid quote & submission.',
+      'Contract negotiations.'
+    ],
+    governmentBullets: [
+      'Planning and project preparation.',
+      'Tendering assistance.',
+      'Bids management.',
+      'Award of contract.',
+      'Contract signing.'
     ],
     accent: '#1d4ed8',
     accentSoft: '#dbeafe',
@@ -31,14 +38,22 @@ const services = [
     id: 'execution',
     label: 'Execution & contract control',
     short:
-      'Independent oversight of design, progress and claims across packages.',
+      'Independent support during construction and contract administration.',
     description:
-      'Hands-on support to keep engineering, progress and payments aligned with contract obligations – before issues turn into disputes.',
-    bullets: [
-      'Structured site visits with clear reporting to decision makers.',
-      'Tracking of progress vs. milestones, payments and variations.',
-      'Early warning on delays, quality non-conformance and claims.',
-      'Support for negotiations, extensions of time and dispute avoidance.'
+      'Support during execution to monitor progress, manage risks and avoid disputes.',
+    contractorBullets: [
+      'Management of project progress.',
+      'Preparations of claims and variations.',
+      'Mitigation of delays and risks.',
+      'Support in EOT approval.',
+      'Assistance in dispute settlement.'
+    ],
+    governmentBullets: [
+      "Review of contractor's progress & advising suitable remedies.",
+      'Verification of claims and variations.',
+      'Contract management support.',
+      'Track quality, cost and time.',
+      'Other support for decision making.'
     ],
     accent: '#16a34a',
     accentSoft: '#dcfce7',
@@ -46,16 +61,21 @@ const services = [
   },
   {
     id: 'program',
-    label: 'Program & policy advisory',
-    short:
-      'Support for PWD and transport agencies on manuals, systems and reforms.',
-    description:
-      'Advisory for large highway and corridor programs funded by governments and multilaterals, aligning technical, contract and governance frameworks.',
-    bullets: [
-      'Design & contract review for expressway and corridor programs.',
-      'Standard bid documents, manuals and SoPs for PWD / agencies.',
-      'Program-level KPIs and dashboards for leadership and lenders.',
-      'Capacity building for internal teams and implementation units.'
+    label: 'Program & implementation advisory',
+    short: 'Advisory support for large highway and infrastructure programs.',
+    description: '',
+    contractorBullets: [
+      'Input to workflow and material-flow management.',
+      'Standard reporting and compliance.',
+      'Support to project teams in site management issues.',
+      'Coordination with authorities for getting payments, EOT approvals, variation approvals & other assistance.'
+    ],
+    governmentBullets: [
+      'Management of concerns of stakeholders and concessionaires.',
+      'Review of work program, proposals for EOT, Variation; & claims.',
+      'Tracking of documents submission and manuals.',
+      'Work program monitoring and advising pathways to encounter challenges.',
+      'Management of alerts for the project management and advising issuance of the letters to be issued to the contractors or the concessioners.'
     ],
     accent: '#f97316',
     accentSoft: '#ffedd5',
@@ -206,14 +226,47 @@ const DetailDescription = styled.p`
   margin-bottom: 0.8rem;
 `;
 
-const DetailBullets = styled.ul`
-  margin: 0.5rem 0 0;
+const SplitContent = styled.div`
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.2rem;
+  margin-top: 0.6rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const VerticalDivider = styled.div`
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, #e5e7eb, transparent);
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const SideBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const SideTitle = styled.div`
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #0b3a6f;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.4rem;
+`;
+
+const SideBullets = styled.ul`
   padding-left: 1.1rem;
-  font-size: 0.86rem;
+  font-size: 0.85rem;
   color: #374151;
 
   li + li {
-    margin-top: 0.3rem;
+    margin-top: 0.28rem;
   }
 `;
 
@@ -244,7 +297,7 @@ const slideVariants = {
   exit: { opacity: 0, y: -14 }
 };
 
-const AUTO_ADVANCE_MS = 7000;
+const AUTO_ADVANCE_MS = 700000;
 
 export default function ServicesShowcase(): JSX.Element {
   const [index, setIndex] = useState<number>(0);
@@ -309,11 +362,29 @@ export default function ServicesShowcase(): JSX.Element {
 
               <DetailDescription>{active.description}</DetailDescription>
 
-              <DetailBullets>
-                {active.bullets.map((b) => (
-                  <li key={b}>{b}</li>
-                ))}
-              </DetailBullets>
+              <SplitContent>
+                {/* Contractor side */}
+                <SideBlock>
+                  <SideTitle>For Contractors / Concessionaires</SideTitle>
+                  <SideBullets>
+                    {active.contractorBullets.map((b) => (
+                      <li key={b}>{b}</li>
+                    ))}
+                  </SideBullets>
+                </SideBlock>
+
+                <VerticalDivider />
+
+                {/* Government side */}
+                <SideBlock>
+                  <SideTitle>For Government / Authorities</SideTitle>
+                  <SideBullets>
+                    {active.governmentBullets.map((b) => (
+                      <li key={b}>{b}</li>
+                    ))}
+                  </SideBullets>
+                </SideBlock>
+              </SplitContent>
 
               <ProgressDots>
                 {services.map((svc, i) => (

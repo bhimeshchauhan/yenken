@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div<{ tiltX: number; tiltY: number }>`
   perspective: 800px;
+  cursor: pointer;
 
   > div {
     transform: ${({ tiltX, tiltY }): string =>

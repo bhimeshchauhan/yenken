@@ -5,7 +5,7 @@ import SiteLayout from '@/components/SiteLayout';
 import HomeContent from './HomeContent';
 
 export const metadata: Metadata = {
-  title: 'Yenken Consulting – Civil, Highway & Infrastructure Consultancy',
+  title: 'YICE – Civil, Highway & Infrastructure Consultancy',
   description:
     'Independent civil engineering consultancy led by Intl PE Narendra Kumar Nawin, specialising in highways, expressways and infrastructure program delivery across India and abroad.'
 };

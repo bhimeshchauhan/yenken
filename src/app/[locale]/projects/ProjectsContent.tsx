@@ -40,12 +40,13 @@ const projects = [
     location: 'Maharashtra, India',
     sector: 'Expressway',
     summary:
-      'Project & contract management support to MSRDC PSO for multiple packages of the 701 km access-controlled expressway.'
+      'Project & contract management support to MSRDC PSO for multiple packages of the 701 km access-controlled expressway.' +
+      'Handled design review of Intelligent Traffic Management System (ITMS), tolling system, CCTV surveillance etc.'
   },
   {
     name: 'Green National Highway Corridor Project',
     location: 'Multiple states, India – World Bank',
-    sector: 'Highway',
+    sector: 'National Highway',
     summary:
       'Design review, construction supervision support and contract administration for climate-resilient highway corridors.'
   },
@@ -57,11 +58,11 @@ const projects = [
       'Support to PWD for project management, bid evaluation, and preparation of contract and quality assurance manuals.'
   },
   {
-    name: 'International corridor & OSBP upgrades',
+    name: 'International corridor & OSBP',
     location: 'East Africa – AfDB funded',
-    sector: 'Corridor',
+    sector: 'International Corridor',
     summary:
-      'Advisory on cross-border corridor improvement, One Stop Border Posts (OSBPs) and logistics connectivity.'
+      'Advisory on cross-border corridor improvement, One Stop Border Posts (OSBPs) and logistics connectivity from Addis Ababa (Ethiopia) to Mombasa (Kenya) corridor.'
   }
 ];
 

@@ -108,6 +108,7 @@ const ServiceCard = styled.div`
   box-shadow: 0 14px 40px rgba(15, 23, 42, 0.04);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
   transition:
     transform 0.18s ease,
     box-shadow 0.18s ease,
@@ -138,63 +139,6 @@ const ServiceText = styled.p`
   font-size: 0.84rem;
   color: #4b5563;
   margin-bottom: 1rem;
-`;
-
-/* ----------------- why choose / typical engagements ----------------- */
-
-const ReasonsSection = styled.section`
-  margin-top: 3.4rem;
-`;
-
-const ReasonsSplit = styled.div`
-  display: grid;
-  gap: 2.4rem;
-
-  @media (min-width: 960px) {
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
-    align-items: center;
-  }
-`;
-
-const ReasonsTitle = styled.h3`
-  font-size: 1.35rem;
-  color: #0b3a6f;
-  margin-bottom: 0.7rem;
-`;
-
-const ReasonsText = styled.p`
-  font-size: 0.93rem;
-  color: #4b5563;
-  margin-bottom: 1.1rem;
-`;
-
-const BulletList = styled.ul`
-  margin: 0.2rem 0 0;
-  padding-left: 1.1rem;
-  font-size: 0.88rem;
-  color: #374151;
-
-  li + li {
-    margin-top: 0.35rem;
-  }
-`;
-
-const ReasonsImageCard = styled.div`
-  background: #ffffff;
-  border-radius: 22px;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
-  overflow: hidden;
-`;
-
-const ReasonsImage = styled.img`
-  width: 100%;
-  height: 260px;
-  object-fit: cover;
-
-  @media (min-width: 960px) {
-    height: 300px;
-  }
 `;
 
 /* ----------------- projects grid (simple) ----------------- */
@@ -377,7 +321,8 @@ export default function ServicesContent(): JSX.Element {
             <IntroLeft>
               <IntroEyebrow>Our services</IntroEyebrow>
               <IntroTitle>
-                We provide focused support for complex highway programs.
+                We provide focused support for complex highway and other
+                programs.
               </IntroTitle>
               <IntroText>
                 Services can be engaged individually or combined as a bespoke
@@ -401,62 +346,6 @@ export default function ServicesContent(): JSX.Element {
               </ServiceCard>
             ))}
           </ServicesGrid>
-
-          {/* reasons / typical engagements */}
-          <ReasonsSection>
-            <ReasonsSplit>
-              <div>
-                <ReasonsTitle>
-                  Reasons why owners and agencies rely on us.
-                </ReasonsTitle>
-                <ReasonsText>
-                  Our approach combines on-site experience with strong contract
-                  understanding and multilateral familiarity.
-                </ReasonsText>
-                <BulletList>
-                  <li>Balanced, contractually sound recommendations.</li>
-                  <li>
-                    Ability to translate technical issues for senior decision
-                    makers.
-                  </li>
-                  <li>
-                    Practical guidance that fits institutional realities and
-                    funding rules.
-                  </li>
-                  <li>
-                    Strong coordination across designers, contractors and
-                    supervision teams.
-                  </li>
-                </BulletList>
-
-                <ReasonsTitle style={{ marginTop: '1.8rem' }}>
-                  Typical engagements.
-                </ReasonsTitle>
-                <BulletList>
-                  <li>
-                    Independent advisor for an expressway or corridor package.
-                  </li>
-                  <li>
-                    Technical support cell for a program management unit (PMU).
-                  </li>
-                  <li>
-                    Design review &amp; QA for a funding agency–supported
-                    project.
-                  </li>
-                  <li>
-                    Short diagnostic of troubled contracts with turnaround plan.
-                  </li>
-                </BulletList>
-              </div>
-
-              <ReasonsImageCard>
-                <ReasonsImage
-                  src='https://images.pexels.com/photos/1181354/pexels-photo-1181354.jpeg?auto=compress&cs=tinysrgb&w=1600'
-                  alt='Consulting team with client reviewing documents'
-                />
-              </ReasonsImageCard>
-            </ReasonsSplit>
-          </ReasonsSection>
 
           {/* projects / case studies */}
           <ProjectsSection>

@@ -41,7 +41,7 @@ export default function Footer(): JSX.Element {
     <Wrap>
       <Container>
         <Inner>
-          <div>© {new Date().getFullYear()} Yenken Consulting</div>
+          <div>© {new Date().getFullYear()} YICE</div>
           <Links>
             <span>📞 {PHONE_DISPLAY}</span>
             <a href={`mailto:${EMAIL}`}>✉️ Email</a>
