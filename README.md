@@ -90,17 +90,6 @@ This boilerplate comes packaged with:
 - [Conventional Commit Lint](https://commitlint.js.org) — Make sure you and your teammates follow conventional commit
 - [Storybook](https://storybook.js.org) — Document your components intelligently and interactively
 
-## Contributing
-
-Contributions are welcome! :metal:
-
-Please check out the [CONTRIBUTING.md](CONTRIBUTING.md).
-
-You can also:
-
-- :star2: give a star in this repository
-- :heavy_heart_exclamation: share this project and recommending it to your friends
-
 ## License
 
 Licensed under the [MIT License](LICENSE)
