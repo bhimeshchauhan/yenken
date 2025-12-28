@@ -1,15 +1,10 @@
-/** @type {import('next').NextConfig} */
 const isGithubPages = process.env.GITHUB_PAGES === 'true';
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
   output: 'export',
   trailingSlash: true,
-
-  reactStrictMode: true,
-
-  compiler: {
-    styledComponents: true
-  },
 
   images: {
     unoptimized: true
