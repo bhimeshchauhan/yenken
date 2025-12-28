@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 # yenken
 
 # yenken website
@@ -103,26 +101,6 @@ You can also:
 - :star2: give a star in this repository
 - :heavy_heart_exclamation: share this project and recommending it to your friends
 
-## Contributors
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tbody>
-    <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/cjambrosi"><img src="https://avatars.githubusercontent.com/u/9125404?v=4?s=100" width="100px;" alt="Cristian J. Ambrosi"/><br /><sub><b>Cristian J. Ambrosi</b></sub></a><br /><a href="#infra-cjambrosi" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/cjambrosi/ts-nextjs-boilerplate-starter/commits?author=cjambrosi" title="Tests">⚠️</a> <a href="https://github.com/cjambrosi/ts-nextjs-boilerplate-starter/commits?author=cjambrosi" title="Code">💻</a> <a href="https://github.com/cjambrosi/ts-nextjs-boilerplate-starter/commits?author=cjambrosi" title="Documentation">📖</a> <a href="https://github.com/cjambrosi/ts-nextjs-boilerplate-starter/pulls?q=is%3Apr+reviewed-by%3Acjambrosi" title="Reviewed Pull Requests">👀</a> <a href="#maintenance-cjambrosi" title="Maintenance">🚧</a> <a href="#tutorial-cjambrosi" title="Tutorials">✅</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
 ## License
 
 Licensed under the [MIT License](LICENSE)
-
-> > > > > > > boiler/main
