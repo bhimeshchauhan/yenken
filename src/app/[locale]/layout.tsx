@@ -9,12 +9,14 @@ import { getI18nLocales } from '@/utils/getI18nLocales';
 const inter = Inter({ subsets: ['latin'] });
 
 export function generateStaticParams(): { locale: string }[] {
-  return getI18nLocales().map((locale) => ({ locale: String(locale) }));
+  return getI18nLocales().map((locale) => ({
+    locale: String(locale)
+  }));
 }
 
 export default async function LocaleLayout({
   children,
-  params: { locale }
+  params
 }: {
   children: ReactNode;
   params: { locale: string };
@@ -22,14 +24,14 @@ export default async function LocaleLayout({
   let messages;
 
   try {
-    messages = (await import(`../../locales/${locale}.json`)).default;
+    messages = (await import(`../../locales/${params.locale}.json`)).default;
   } catch {
     notFound();
   }
 
   return (
     <div className={inter.className}>
-      <AppProvider locale={locale} messages={messages}>
+      <AppProvider locale={params.locale} messages={messages}>
         {children}
       </AppProvider>
     </div>
