@@ -13,21 +13,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      # 1️⃣ Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      # 2️⃣ Setup Node + Yarn cache
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: yarn
 
+      # 3️⃣ Install dependencies
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Build Next.js
+      # 4️⃣ Typecheck (optional but recommended)
+      - name: Type check
+        run: yarn typecheck
+
+      # 5️⃣ Build static site
+      - name: Build Next.js (static export)
         run: yarn build
 
+      # 6️⃣ Deploy to GitHub Pages
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
