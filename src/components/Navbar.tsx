@@ -8,6 +8,8 @@ import styled from 'styled-components';
 
 import { PHONE_TEL } from '@/lib/contactDetails';
 
+/* ---------------- styles ---------------- */
+
 const Header = styled.header`
   position: sticky;
   top: 0;
@@ -24,8 +26,6 @@ const Inner = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-
-/* ---------- BRAND (logo + text) ---------- */
 
 const Brand = styled(Link)`
   display: inline-flex;
@@ -57,14 +57,33 @@ const BrandLogoWrapper = styled.div`
   flex-shrink: 0;
 `;
 
-/* ---------- NAV ---------- */
+const NavLinks = styled.nav<{ open: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+
+  @media (max-width: 768px) {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 3.3rem;
+    flex-direction: column;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: ${({ open }: { open: boolean }): string =>
+      open ? '0.8rem 1.25rem 1.1rem' : '0'};
+    display: ${({ open }: { open: boolean }): string =>
+      open ? 'flex' : 'none'};
+    align-items: flex-start;
+  }
+`;
 
 const NavItem = styled(Link)<{ $active: boolean }>`
   font-size: 0.9rem;
   color: ${({ $active }): string => ($active ? '#0b3a6f' : '#111827')};
   font-weight: ${({ $active }): string => ($active ? '600' : '400')};
-  position: relative;
   text-decoration: none;
+  position: relative;
 
   &::after {
     content: '';
@@ -82,27 +101,6 @@ const NavItem = styled(Link)<{ $active: boolean }>`
   }
 `;
 
-const NavLinks = styled.nav<{ open: boolean }>`
-  display: flex;
-  align-items: center;
-  gap: 1.4rem;
-  font-size: 0.9rem;
-
-  @media (max-width: 768px) {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 3.3rem;
-    flex-direction: column;
-    background: #ffffff;
-    border-bottom: 1px solid #e5e7eb;
-    padding: ${({ open }): string => (open ? '0.8rem 1.25rem 1.1rem' : '0')};
-    display: ${({ open }): string => (open ? 'flex' : 'none')};
-    align-items: flex-start;
-  }
-`;
-
-// Plain <a> for external/tel CTA
 const CTAButton = styled.a`
   padding: 0.55rem 1.2rem;
   border-radius: 999px;
@@ -110,8 +108,7 @@ const CTAButton = styled.a`
   color: #ffffff;
   font-weight: 600;
   font-size: 0.85rem;
-  border: none;
-  cursor: pointer;
+  text-decoration: none;
 `;
 
 const Burger = styled.button`
@@ -133,26 +130,29 @@ const Burger = styled.button`
   }
 `;
 
-const links = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/services', label: 'Services' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/contact', label: 'Contact' }
-];
+/* ---------------- component ---------------- */
 
 export default function Navbar(): JSX.Element {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const normalizedPathRaw = pathname.replace(/^\/[^/]+(?=\/|$)/, '');
-  const normalizedPath = normalizedPathRaw === '' ? '/' : normalizedPathRaw;
+
+  // 👉 Extract locale from URL (/en/anything)
+  const locale = pathname.split('/')[1] || 'en';
+
+  const navLinks = [
+    { href: `/${locale}`, label: 'Home' },
+    { href: `/${locale}/about`, label: 'About' },
+    { href: `/${locale}/services`, label: 'Services' },
+    { href: `/${locale}/projects`, label: 'Projects' },
+    { href: `/${locale}/contact`, label: 'Contact' }
+  ];
 
   const closeMenu = (): void => setOpen(false);
 
   return (
     <Header>
       <Inner>
-        <Brand href='/'>
+        <Brand href={`/${locale}`}>
           <BrandLogoWrapper>
             <Image
               src='/images/logo.svg'
@@ -167,35 +167,24 @@ export default function Navbar(): JSX.Element {
           </BrandText>
         </Brand>
 
-        <Burger
-          onClick={(): void => setOpen((v) => !v)}
-          aria-label='Toggle navigation menu'
-        >
+        <Burger onClick={(): void => setOpen((v: boolean) => !v)}>
           <span />
           <span />
           <span />
         </Burger>
 
         <NavLinks open={open}>
-          {links.map((l) => {
-            const isActive =
-              l.href === '/'
-                ? normalizedPath === '/'
-                : normalizedPath.startsWith(l.href);
+          {navLinks.map((l) => (
+            <NavItem
+              key={l.href}
+              href={l.href}
+              $active={pathname === l.href}
+              onClick={closeMenu}
+            >
+              {l.label}
+            </NavItem>
+          ))}
 
-            return (
-              <NavItem
-                key={l.href}
-                href={l.href}
-                $active={isActive}
-                onClick={closeMenu}
-              >
-                {l.label}
-              </NavItem>
-            );
-          })}
-
-          {/* Tel link is external → normal <a>, not Next <Link> */}
           <CTAButton href={`tel:${PHONE_TEL}`} onClick={closeMenu}>
             Call Now
           </CTAButton>
