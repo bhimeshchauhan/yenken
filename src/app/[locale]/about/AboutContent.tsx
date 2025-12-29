@@ -408,7 +408,7 @@ export default function AboutContent(): JSX.Element {
             {/* left image */}
             <HeroImageCard>
               <HeroImage
-                src='https://images.pexels.com/photos/1181354/pexels-photo-1181354.jpeg?auto=compress&cs=tinysrgb&w=1600'
+                src='/images/work.png'
                 alt='Project team discussing highway program'
               />
               <FloatingNote>
@@ -582,7 +582,7 @@ export default function AboutContent(): JSX.Element {
             <TeamGrid>
               <MemberCard>
                 <MemberPhoto
-                  src='https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=1600'
+                  src='/images/nknawin.png'
                   alt='Narendra Kumar Nawin'
                 />
                 <MemberName>Narendra Kumar Nawin</MemberName>
