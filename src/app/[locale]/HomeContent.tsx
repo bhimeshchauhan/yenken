@@ -27,17 +27,25 @@ const HeroBackground = styled.div`
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-image: linear-gradient(
-      120deg,
-      rgba(15, 23, 42, 0.96) 0%,
-      rgba(15, 23, 42, 0.9) 45%,
-      rgba(15, 23, 42, 0.55) 70%,
-      rgba(15, 23, 42, 0.9) 100%
-    ),
-    url('https://images.pexels.com/photos/258160/pexels-photo-258160.jpeg?auto=compress&cs=tinysrgb&w=1600');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.98;
+  overflow: hidden;
+`;
+
+const HeroVideo = styled.video`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+const HeroOverlay = styled.div`
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(15, 23, 42, 0.96) 0%,
+    rgba(15, 23, 42, 0.9) 45%,
+    rgba(15, 23, 42, 0.55) 70%,
+    rgba(15, 23, 42, 0.9) 100%
+  );
 `;
 
 const HeroInner = styled(motion.div)`
@@ -504,7 +512,14 @@ export default function HomeContent(): JSX.Element {
     <>
       {/* HERO */}
       <HeroSection>
-        <HeroBackground />
+        <HeroBackground>
+          <HeroVideo autoPlay muted loop playsInline preload='metadata'>
+            <source src='/videos/hero.mp4' type='video/mp4' />
+          </HeroVideo>
+
+          <HeroOverlay />
+        </HeroBackground>
+
         <Container>
           <HeroInner
             initial={{ opacity: 0, y: 26 }}
