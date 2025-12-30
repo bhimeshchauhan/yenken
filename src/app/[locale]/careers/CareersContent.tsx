@@ -88,6 +88,7 @@ const Grid = styled.div`
 const Panel = styled.div`
   background: #ffffff;
   border: 1px solid #e5e7eb;
+  color: #0f172a;
   border-radius: 16px;
   padding: 1.1rem;
   box-shadow: 0 10px 28px rgba(2, 6, 23, 0.05);
