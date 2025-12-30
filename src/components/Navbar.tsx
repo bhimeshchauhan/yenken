@@ -136,8 +136,8 @@ export default function Navbar(): JSX.Element {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  // 👉 Extract locale from URL (/en/anything)
   const locale = pathname.split('/')[1] || 'en';
+  const cleanPath = pathname.replace(/\/$/, '');
 
   const navLinks = [
     { href: `/${locale}`, label: 'Home' },
@@ -179,7 +179,11 @@ export default function Navbar(): JSX.Element {
             <NavItem
               key={l.href}
               href={l.href}
-              $active={pathname === l.href}
+              $active={
+                l.href === `/${locale}`
+                  ? cleanPath === `/${locale}`
+                  : cleanPath === l.href || cleanPath.startsWith(`${l.href}/`)
+              }
               onClick={closeMenu}
             >
               {l.label}
