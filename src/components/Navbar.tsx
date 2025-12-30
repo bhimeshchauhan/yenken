@@ -144,7 +144,8 @@ export default function Navbar(): JSX.Element {
     { href: `/${locale}/about`, label: 'About' },
     { href: `/${locale}/services`, label: 'Services' },
     { href: `/${locale}/projects`, label: 'Projects' },
-    { href: `/${locale}/contact`, label: 'Contact' }
+    { href: `/${locale}/contact`, label: 'Contact' },
+    { href: `/${locale}/careers`, label: 'Careers' }
   ];
 
   const closeMenu = (): void => setOpen(false);
